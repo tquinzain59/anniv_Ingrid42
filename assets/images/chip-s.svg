@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="100%" height="100%">
+  <defs>
+    <linearGradient id="chipGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2a2a2d"/>
+      <stop offset="50%" stop-color="#18181b"/>
+      <stop offset="100%" stop-color="#0a0a0c"/>
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f5d77f"/>
+      <stop offset="50%" stop-color="#d4af37"/>
+      <stop offset="100%" stop-color="#aa7c11"/>
+    </linearGradient>
+    <linearGradient id="silverGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#8e8e93"/>
+    </linearGradient>
+    <filter id="chipGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+
+  <!-- Outer pins -->
+  <g stroke="#636366" stroke-width="3" opacity="0.6">
+    <!-- Top & Bottom Pins -->
+    <path d="M 90 40 L 90 60 M 130 40 L 130 60 M 170 40 L 170 60 M 210 40 L 210 60 M 250 40 L 250 60 M 290 40 L 290 60 M 310 40 L 310 60" />
+    <path d="M 90 340 L 90 360 M 130 340 L 130 360 M 170 340 L 170 360 M 210 340 L 210 360 M 250 340 L 250 360 M 290 340 L 290 360 M 310 340 L 310 360" />
+    <!-- Left & Right Pins -->
+    <path d="M 40 90 L 60 90 M 40 130 L 60 130 M 40 170 L 60 170 M 40 210 L 60 210 M 40 250 L 60 250 M 40 290 L 60 290 M 40 310 L 60 310" />
+    <path d="M 340 90 L 360 90 M 340 130 L 360 130 M 340 170 L 360 170 M 340 210 L 360 210 M 340 250 L 360 250 M 340 290 L 360 290 M 340 310 L 360 310" />
+  </g>
+
+  <!-- Main Chip Body -->
+  <rect x="60" y="60" width="280" height="280" rx="36" fill="url(#chipGrad)" stroke="#48484a" stroke-width="2.5" />
+  
+  <!-- Circuit Traces -->
+  <g stroke="rgba(212, 175, 55, 0.25)" stroke-width="1.5" fill="none">
+    <path d="M 75 100 H 120 V 140 H 150" />
+    <path d="M 75 200 H 130 V 220" />
+    <path d="M 75 300 H 110 V 260 H 140" />
+    <path d="M 325 100 H 280 V 140 H 250" />
+    <path d="M 325 200 H 270 V 220" />
+    <path d="M 325 300 H 290 V 260 H 260" />
+    <circle cx="150" cy="140" r="3" fill="#d4af37"/>
+    <circle cx="250" cy="140" r="3" fill="#d4af37"/>
+    <circle cx="140" cy="260" r="3" fill="#d4af37"/>
+    <circle cx="260" cy="260" r="3" fill="#d4af37"/>
+  </g>
+
+  <!-- Inner Die Area -->
+  <rect x="100" y="100" width="200" height="200" rx="24" fill="#121214" stroke="url(#goldGrad)" stroke-width="2" filter="url(#chipGlow)"/>
+
+  <!-- Glowing Apple/S Logo -->
+  <text x="200" y="185" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif" font-weight="800" font-size="82" fill="url(#goldGrad)" letter-spacing="1">S</text>
+  <text x="200" y="225" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif" font-weight="700" font-size="18" fill="url(#silverGrad)" letter-spacing="4">SPONTANÉE</text>
+  <text x="200" y="255" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif" font-weight="500" font-size="12" fill="#d4af37" letter-spacing="3">42 CORES • BIONIC</text>
+</svg>

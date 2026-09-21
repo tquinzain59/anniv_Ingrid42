@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ingrid 42.0 — Notre meilleure Ingrid à ce jour — Apple Keynote</title>
+  <meta name="description" content="Découvrez Ingrid 42.0. Puce S comme Spontanée, autonomie nocturne record de 6h, module sonore rafale x2. Lancement officiel vendredi 25/09 au Giallo à Sainghin.">
+  
+  <!-- Open Graph for iMessage / WhatsApp previews -->
+  <meta property="og:title" content="Voici Ingrid 42.0. Notre meilleure Ingrid à ce jour.">
+  <meta property="og:description" content="Autonomie en soirée : jusqu'à 6h sans faiblir. Nouvelle Puce S, rots en rafale cadence x2. Lancement officiel vendredi 25/09 au Giallo à Sainghin.">
+  <meta property="og:type" content="website">
+
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 170 170%22><text y=%22.9em%22 font-size=%2290%22></text></svg>">
+</head>
+<body>
+
+  <!-- BACKGROUND VIDEO & CINEMATIC DARK FILTER OVERLAY -->
+  <div id="ambient-background-wrap">
+    <video id="bg-video" autoplay muted loop playsinline preload="auto">
+      <source src="assets/videos/background.mp4" type="video/mp4">
+    </video>
+    <canvas id="ambient-canvas"></canvas>
+  </div>
+  <div class="dark-overlay"></div>
+
+  <!-- FLOATING VIDEO UTILITY BAR -->
+  <div class="floating-video-bar">
+    <button id="btn-toggle-video" title="Mettre en pause ou reprendre la vidéo">
+      <span>⏸ Pause</span>
+    </button>
+    <button class="clip-btn active" data-clip="0">Clip 1</button>
+    <button class="clip-btn" data-clip="1">Clip 2</button>
+    <button class="clip-btn" data-clip="2">Clip 3</button>
+    <button id="btn-upload-video" title="Charger vos propres vidéos d'Ingrid">
+      <span>📁 Importer</span>
+    </button>
+    <input type="file" id="video-file-input" accept="video/mp4,video/quicktime,video/webm">
+  </div>
+
+  <!-- TOP GLOBAL RIBBON -->
+  <aside class="global-ribbon">
+    <span>Événement Spécial : Lancement officiel le <strong>vendredi 25/09 au Giallo à Sainghin</strong> dès 19h30.</span>
+    <a href="#reservation" class="trigger-rsvp">Réserver votre exemplaire &gt;</a>
+  </aside>
+
+  <!-- APPLE GLASS NAVBAR -->
+  <header class="apple-nav">
+    <div class="nav-container">
+      <a href="#" class="nav-brand">
+        <svg class="apple-logo-icon" viewBox="0 0 170 170" aria-label="Apple">
+          <path d="M150.37 130.25c-2.45 5.66-5.35 10.87-8.71 15.66-4.58 6.53-8.33 11.05-11.22 13.56-4.48 4.12-9.28 6.23-14.42 6.35-3.69 0-8.14-1.05-13.32-3.18-5.19-2.12-9.97-3.17-14.34-3.17-4.58 0-9.49 1.05-14.75 3.17-5.26 2.13-9.5 3.24-12.74 3.35-4.35.13-9.16-1.9-14.42-6.08-3.7-3.04-7.6-7.77-11.71-14.2-6.52-10.32-11.5-22.04-14.93-35.15-3.43-13.11-5.15-25.26-5.15-36.46 0-16.1 4.12-29.47 12.36-40.11 8.24-10.64 18.57-16.08 31-16.32 4.9.11 10.45 1.45 16.65 4.02 6.2 2.57 10.15 3.91 11.85 4.02 1.52-.11 5.76-1.56 12.74-4.35 6.98-2.79 12.74-4.08 17.29-3.86 13.29.98 23.95 6.09 32 15.33-11.53 6.96-17.18 16.53-16.96 28.71.22 9.79 4.02 17.94 11.41 24.47 7.39 6.53 16.2 10.12 26.43 10.77-2.61 7.83-5.87 15.99-9.78 24.47zM119.22 31.85c0-7.83 2.83-15.12 8.48-21.86 5.65-6.74 12.62-10.77 20.91-12.09.22 1.09.33 2.07.33 2.94 0 7.83-3.05 15.23-9.14 22.2-6.09 6.96-13.27 10.88-21.54 11.75-.22-.98-.33-1.96-.33-2.94z"/>
+        </svg>
+        <span>Ingrid 42.0</span>
+      </a>
+      
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#presentation">Présentation</a></li>
+          <li><a href="#autonomie">Autonomie</a></li>
+          <li><a href="#module-sonore">Module Sonore</a></li>
+          <li><a href="#puce-s">Puce S</a></li>
+          <li><a href="#bug-connu">Bug #42</a></li>
+          <li><a href="#galerie">Finitions</a></li>
+          <li><a href="#comparatif">Comparatif</a></li>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="btn-pill-blue trigger-rsvp">Réserver</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO SECTION -->
+    <section id="presentation" class="hero-section">
+      <div class="hero-eyebrow">Nouveau • Édition Anniversaire</div>
+      <h1 class="hero-title">Voici Ingrid 42.0.</h1>
+      
+      <p class="hero-subtitle">
+        Notre meilleure Ingrid à ce jour. <span>Encore plus Ingrid.</span>
+      </p>
+
+      <div class="hero-release-tag">
+        <span class="live-dot"></span>
+        <span>Disponible à partir du 24 septembre • Soirée officielle le 25/09</span>
+      </div>
+
+      <div class="hero-ctas">
+        <button class="btn-hero-primary trigger-rsvp">
+          <span>Réserver mon exemplaire</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+        <a href="#keynote-highlights" class="btn-hero-secondary">
+          <span>Explorer les nouveautés</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 9l-7 7-7-7"/></svg>
+        </a>
+      </div>
+
+      <div class="hero-specs-strip">
+        <div class="spec-chip">
+          <span>⚡</span>
+          <span>Autonomie : <strong>jusqu'à 6h sans faiblir</strong></span>
+        </div>
+        <div class="spec-chip">
+          <span>🔊</span>
+          <span>Module sonore : <strong>Rots en rafale cadence x2</strong></span>
+        </div>
+        <div class="spec-chip">
+          <span>🧠</span>
+          <span>Processeur : <strong>Puce S Spontanée</strong></span>
+        </div>
+        <div class="spec-chip">
+          <span>🍷</span>
+          <span>Patch 42.0 : <strong>Bug du "seul verre" maintenu</strong></span>
+        </div>
+      </div>
+
+      <!-- IPHONE 16 PRO MOCKUP SHOWCASE -->
+      <div class="iphone-showcase-wrap">
+        <div class="iphone-frame">
+          <div class="dynamic-island">
+            <span class="di-icon">🍸</span>
+            <span class="di-dot"></span>
+          </div>
+          <div class="iphone-screen">
+            <img src="assets/images/IMG_1850.gif" alt="Ingrid 42.0 en direct" class="iphone-screen-media">
+          </div>
+        </div>
+        <div class="iphone-badge-tag"> Ingrid 42.0 • Dynamic Island & 120Hz</div>
+      </div>
+    </section>
+
+    <!-- KEYNOTE STATEMENT -->
+    <section class="statement-section">
+      <p class="statement-text">
+        « Une conception d'une précision chirurgicale. <span class="highlight">Façonnée en titane de fête</span>, dotée d'une répartie fulgurante et d'une soif de vivre inégalée. »
+      </p>
+    </section>
+
+    <!-- BENTO GRID HIGHLIGHTS (LES 4 POINTS DU SMS) -->
+    <section id="keynote-highlights" class="section-wrapper">
+      <div class="section-header">
+        <div class="section-eyebrow">Architecture & Innovations</div>
+        <h2 class="section-title">Quatre avancées majeures. Zéro compromis.</h2>
+      </div>
+
+      <div class="bento-grid">
+        
+        <!-- CARD 1: AUTONOMIE EN SOIRÉE (Col 7) -->
+        <div id="autonomie" class="bento-card col-span-7">
+          <div>
+            <span class="card-badge badge-green">⚡ Gestion Énergétique</span>
+            <h3 class="card-title">Autonomie en soirée</h3>
+            <div class="card-stat-giant">6 HEURES.</div>
+            <p class="card-desc">
+              <strong>Jusqu'à 6 heures sans faiblir.</strong> Sa tolérance à l'alcool progresse à chaque version, comme jamais. Grâce à un algorithme de dissipation thermique des bulles et un système d'endurance nocturne calibré pour faire la fermeture.
+            </p>
+          </div>
+
+          <div class="battery-gauge-container">
+            <div class="battery-header">
+              <span>Niveau de fête : <strong>Optimal</strong></span>
+              <span class="fast-charge-badge">⚡ Recharge continue au Spritz</span>
+            </div>
+            <div class="battery-bar-track">
+              <div class="battery-bar-fill"></div>
+            </div>
+            <div class="battery-footer">
+              <span>0h • Début d'apéro</span>
+              <span>3h • Ambiance max</span>
+              <span>6h+ • Dernier verre debout</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD 2: NOUVEAU MODULE SONORE (Col 5) -->
+        <div id="module-sonore" class="bento-card col-span-5">
+          <div>
+            <span class="card-badge badge-purple">🔊 Acoustique Avancée</span>
+            <h3 class="card-title">Nouveau module sonore</h3>
+            <p class="card-desc">
+              <strong>Rots en rafale.</strong> Cadence <strong>deux fois plus rapide</strong>, qualité audio inchangée. Un flux d'air puissant et sans complexe, diffusé en Spatial Audio 360° pour surprendre toute la tablée.
+            </p>
+          </div>
+
+          <div class="audio-visualizer-box">
+            <div class="soundwave-bars" id="soundwave-container">
+              <span class="sound-bar" style="height: 18px;"></span>
+              <span class="sound-bar" style="height: 38px;"></span>
+              <span class="sound-bar" style="height: 52px;"></span>
+              <span class="sound-bar" style="height: 26px;"></span>
+              <span class="sound-bar" style="height: 48px;"></span>
+              <span class="sound-bar" style="height: 60px;"></span>
+              <span class="sound-bar" style="height: 34px;"></span>
+              <span class="sound-bar" style="height: 20px;"></span>
+            </div>
+            <button id="btn-test-sound" class="btn-test-sound">
+              <span>▶ Tester le module sonore (Rafale x2)</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- CARD 3: NOUVELLE PUCE S (Col 6) -->
+        <div id="puce-s" class="bento-card col-span-6">
+          <div>
+            <span class="card-badge badge-orange">🧠 Apple Silicon</span>
+            <h3 class="card-title">Nouvelle Puce S. Comme Spontanée.</h3>
+            <p class="card-desc">
+              Gravée sur le procédé exclusif de 42 ans d'expérience. <strong>Sorties encore plus imprévisibles</strong>, répliques instantanées et aucun filtre de politesse superflu.
+            </p>
+          </div>
+
+          <div class="chip-visual-wrap">
+            <img src="assets/images/chip-s.svg" alt="Puce S Spontanée Bionic" class="chip-img">
+          </div>
+
+          <ul class="chip-bullets">
+            <li>
+              <span class="bullet-icon-gold">✦</span>
+              <span><strong>Sorties imprévisibles :</strong> Déclenchement instantané d'anecdotes croustillantes et de vérités assumées.</span>
+            </li>
+            <li>
+              <span class="bullet-icon-gold">✦</span>
+              <span><strong>Insultes en option :</strong> Activées par défaut dans le noyau système pour une authenticité totale.</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- CARD 4: BUG CONNU NON CORRIGÉ (Col 6) -->
+        <div id="bug-connu" class="bento-card col-span-6">
+          <div>
+            <span class="card-badge badge-red">⚠️ Release Notes 42.0</span>
+            <h3 class="card-title">Bug connu non corrigé</h3>
+            <p class="card-desc">
+              Le célèbre <strong>« Je ne bois qu'un seul verre »</strong> persiste. Nos équipes d'ingénieurs ont longuement enquêté et ont conclu qu'il s'agit d'une composante essentielle du charme de l'appareil.
+            </p>
+          </div>
+
+          <div class="bug-system-box">
+            <div class="bug-header">
+              <span>⚠️ RAPPORT D'INCIDENT #INGRID-42-GLASS</span>
+            </div>
+            <div class="bug-code-line">
+              &gt; input: <span class="highlight-text">"Je ne prends qu'un seul verre ce soir"</span><br>
+              &gt; parse_state: TRUE<br>
+              &gt; loop_detected: Commande de 3 bouteilles supplémentaires...<br>
+              &gt; exception: ZeroRegretFoundException
+            </div>
+            <span class="bug-status-pill">STATUT DÉFINITIF : WONTFIX (FEATURE PERMANENTE)</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION COMPARATIF (TABLEAU APPLE) -->
+    <section id="comparatif" class="comparison-section">
+      <div class="section-header">
+        <div class="section-eyebrow">Tableau Comparatif</div>
+        <h2 class="section-title">Quel modèle préférez-vous réserver ?</h2>
+      </div>
+
+      <div class="table-container">
+        <table class="compare-table">
+          <thead>
+            <tr>
+              <th>Fonctionnalité</th>
+              <th>Ingrid 40.0</th>
+              <th>Ingrid 41.0</th>
+              <th class="highlight-col">Ingrid 42.0</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="feature-title">Autonomie en soirée</td>
+              <td>4 heures</td>
+              <td>5 heures</td>
+              <td class="highlight-col">Jusqu'à 6 heures sans faiblir</td>
+            </tr>
+            <tr>
+              <td class="feature-title">Tolérance à l'alcool</td>
+              <td>Avancée</td>
+              <td>Remarquable</td>
+              <td class="highlight-col">Progression historique record</td>
+            </tr>
+            <tr>
+              <td class="feature-title">Module sonore</td>
+              <td>Standard</td>
+              <td>Cadence 1x</td>
+              <td class="highlight-col">Rots en rafale x2 (Spatial Audio)</td>
+            </tr>
+            <tr>
+              <td class="feature-title">Puce processeur</td>
+              <td>Puce S v1</td>
+              <td>Puce S v2</td>
+              <td class="highlight-col">Puce S Spontanée (Insultes incluses)</td>
+            </tr>
+            <tr>
+              <td class="feature-title">Bug "Un seul verre"</td>
+              <td>Présent</td>
+              <td>Non corrigé</td>
+              <td class="highlight-col">Classé fonctionnalité légendaire</td>
+            </tr>
+            <tr>
+              <td class="feature-title">Célébration</td>
+              <td>Passée</td>
+              <td>Archivée</td>
+              <td class="highlight-col">Vendredi 25/09 au Giallo</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- SECTION GALERIE & FINITIONS TITANE -->
+    <section id="galerie" class="gallery-section">
+      <div class="section-header">
+        <div class="section-eyebrow">Design & Finitions</div>
+        <h2 class="section-title">Taillée dans le titane de la fête.</h2>
+        <p style="color: #a1a1a6; font-size: 17px; margin-top: 14px; max-width: 680px; margin-left: auto; margin-right: auto;">
+          Une allure intemporelle, une endurance éprouvée jusqu'au bout de la nuit et un capteur photo toujours prêt pour les moments d'anthologie.
+        </p>
+      </div>
+
+      <div class="gallery-grid">
+        <div class="gallery-card tall">
+          <img src="assets/images/IMG_3851.jpeg" alt="Finition Titane Fête" class="gallery-img">
+          <div class="gallery-overlay"></div>
+          <div class="gallery-info">
+            <div class="gallery-tag">Finition Signature</div>
+            <div class="gallery-caption">Titane Fête & Élégance</div>
+            <div class="gallery-subcaption">Conçue pour rayonner du premier cocktail jusqu'à l'aube.</div>
+          </div>
+        </div>
+
+        <div class="gallery-card">
+          <img src="assets/images/IMG_0421.jpeg" alt="Capteur Haute Ambiance" class="gallery-img">
+          <div class="gallery-overlay"></div>
+          <div class="gallery-info">
+            <div class="gallery-tag">Capteur d'Ambiance</div>
+            <div class="gallery-caption">Sourire 42 Mégapixels</div>
+            <div class="gallery-subcaption">Zéro bruit numérique, 100% spontanéité.</div>
+          </div>
+        </div>
+
+        <div class="gallery-card">
+          <img src="assets/images/IMG_2273.jpeg" alt="Mode Spontanéité Pro" class="gallery-img">
+          <div class="gallery-overlay"></div>
+          <div class="gallery-info">
+            <div class="gallery-tag">Puce S en Action</div>
+            <div class="gallery-caption">Capture d'Émotions Brutes</div>
+            <div class="gallery-subcaption">Processeur de répartie sans filtre ni concession.</div>
+          </div>
+        </div>
+
+        <div class="gallery-card">
+          <img src="assets/images/IMG_2961.jpeg" alt="Grand Angle Fête" class="gallery-img">
+          <div class="gallery-overlay"></div>
+          <div class="gallery-info">
+            <div class="gallery-tag">Ultra Grand-Angle</div>
+            <div class="gallery-caption">Convivialité Maximale</div>
+            <div class="gallery-subcaption">Champ de vision optimisé pour réunir toute la bande.</div>
+          </div>
+        </div>
+
+        <div class="gallery-card">
+          <img src="assets/images/IMG_1356.jpeg" alt="Endurance Nocturne" class="gallery-img">
+          <div class="gallery-overlay"></div>
+          <div class="gallery-info">
+            <div class="gallery-tag">Mode Nuit Avancé</div>
+            <div class="gallery-caption">Endurance Prolongée</div>
+            <div class="gallery-subcaption">Autonomie 6h garantie en conditions réelles.</div>
+          </div>
+        </div>
+
+        <div class="gallery-card">
+          <img src="assets/images/IMG_1725.jpeg" alt="Système Audio & Rire" class="gallery-img">
+          <div class="gallery-overlay"></div>
+          <div class="gallery-info">
+            <div class="gallery-tag">Module Sonore</div>
+            <div class="gallery-caption">Rires & Décibels</div>
+            <div class="gallery-subcaption">Puissance sonore calibrée pour couvrir toute la tablée.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EVENT LAUNCH & LOCATION DETAILS -->
+    <section id="evenement" class="event-section">
+      <div class="event-banner">
+        <div class="event-eyebrow">Lancement Officiel en Direct</div>
+        <h2 class="event-title">La Keynote au Giallo.</h2>
+        <div class="event-datetime">Vendredi 25 Septembre • À partir de 19h30</div>
+        <div class="event-venue">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+          <span>Restaurant Le Giallo — Sainghin-en-Mélantois</span>
+        </div>
+
+        <!-- COUNTDOWN -->
+        <div class="countdown-wrap">
+          <div class="countdown-unit">
+            <span class="countdown-number" id="count-days">00</span>
+            <span class="countdown-label">Jours</span>
+          </div>
+          <div class="countdown-unit">
+            <span class="countdown-number" id="count-hours">00</span>
+            <span class="countdown-label">Heures</span>
+          </div>
+          <div class="countdown-unit">
+            <span class="countdown-number" id="count-minutes">00</span>
+            <span class="countdown-label">Minutes</span>
+          </div>
+          <div class="countdown-unit">
+            <span class="countdown-number" id="count-seconds">00</span>
+            <span class="countdown-label">Secondes</span>
+          </div>
+        </div>
+
+        <div class="event-action-buttons">
+          <button class="btn-gold trigger-rsvp">
+            <span>Réserver votre place pour la Keynote</span>
+          </button>
+          <a href="https://maps.google.com/?q=Restaurant+Le+Giallo+Sainghin-en-Melantois" target="_blank" rel="noopener" class="btn-glass-secondary">
+            <span>Ouvrir dans Maps</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- RSVP MODAL (APPLE STORE CHECKOUT EXPERIENCE) -->
+  <div id="rsvp-modal-backdrop" class="rsvp-modal-backdrop">
+    <div class="rsvp-modal">
+      <button id="btn-close-rsvp" class="modal-close-btn" aria-label="Fermer">✕</button>
+      
+      <div class="modal-header">
+        <div style="font-size: 32px; margin-bottom: 8px;"></div>
+        <h3 class="modal-apple-title">Réserver votre exemplaire</h3>
+        <p class="modal-subtitle">Confirmez votre présence pour le lancement officiel d'Ingrid 42.0</p>
+      </div>
+
+      <!-- FORMULAIRE -->
+      <form id="rsvp-form">
+        <div class="form-group">
+          <label class="form-label" for="rsvp-name">Votre Nom & Prénom *</label>
+          <input type="text" id="rsvp-name" class="form-input" placeholder="Ex: Jean Dupont" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="rsvp-guests">Nombre d'exemplaires réservés *</label>
+          <select id="rsvp-guests" class="form-select">
+            <option value="1 personne (Solo VIP)">Je viens seul(e) (1 exemplaire)</option>
+            <option value="2 personnes (Duo de choc)">Je viens avec quelqu'un (+1)</option>
+            <option value="Groupe / Famille">Je viens en groupe (+2 ou plus)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="rsvp-drink">Votre boisson de charge préférée</label>
+          <select id="rsvp-drink" class="form-select">
+            <option value="Spritz">Spritz (Recharge rapide)</option>
+            <option value="Vin Blanc / Rouge">Vin (Haute fidélité)</option>
+            <option value="Bière fraîche">Bière (Compatible module sonore x2)</option>
+            <option value="Champagne">Champagne (Mode anniversaire)</option>
+            <option value="Sans alcool">Soft / Eau gazeuse</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="rsvp-note">Un message spécial pour Ingrid ?</label>
+          <textarea id="rsvp-note" class="form-textarea" rows="2" placeholder="Une réplique, un vœu pour ses 42 ans..."></textarea>
+        </div>
+
+        <button type="submit" class="btn-whatsapp-rsvp" style="width: 100%; margin-top: 10px;">
+          <span>Valider ma réservation</span>
+        </button>
+      </form>
+
+      <!-- VIEW CONFIRMATION PASS WALLET -->
+      <div id="rsvp-success" class="rsvp-success-view">
+        <div class="apple-pass-ticket">
+          <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px dashed rgba(255,255,255,0.2); padding-bottom: 12px; margin-bottom: 12px;">
+            <span style="font-size: 13px; font-weight: 700; color: #d4af37;">INGRID 42.0 • PASS KEYNOTE</span>
+            <span style="font-size: 12px; color: #30d158;">CONFIRMÉ ✓</span>
+          </div>
+          <div style="margin-bottom: 8px;">
+            <div style="font-size: 11px; color: #86868b; text-transform: uppercase;">Titulaire du Pass</div>
+            <div id="pass-guest-name" style="font-size: 18px; font-weight: 700; color: #ffffff;">Invité VIP</div>
+          </div>
+          <div style="margin-bottom: 8px;">
+            <div style="font-size: 11px; color: #86868b; text-transform: uppercase;">Formule</div>
+            <div id="pass-option" style="font-size: 14px; color: #2997ff;">1 personne • Prêt pour Ingrid 42.0</div>
+          </div>
+          <div>
+            <div style="font-size: 11px; color: #86868b; text-transform: uppercase;">Rendez-vous</div>
+            <div style="font-size: 14px; color: #e5e5ea;">Vendredi 25 Septembre, 19h30 au Giallo</div>
+          </div>
+        </div>
+
+        <p style="font-size: 14px; color: #a1a1a6; margin-bottom: 20px;">
+          Envoyez votre confirmation en un clic pour finaliser la réservation sur le carnet d'adresses :
+        </p>
+
+        <div class="rsvp-channels">
+          <a id="btn-send-whatsapp" href="#" target="_blank" class="btn-whatsapp-rsvp">
+            <span>💬 Envoyer ma confirmation via WhatsApp</span>
+          </a>
+          <a id="btn-send-sms" href="#" class="btn-sms-rsvp">
+            <span>✉️ Envoyer par SMS</span>
+          </a>
+          <button id="btn-download-ics" class="btn-glass-secondary" style="width: 100%; justify-content: center;">
+            <span>📅 Ajouter l'événement à mon Agenda (.ics)</span>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- APPLE FOOTER & HILARIOUS LEGAL FOOTNOTES -->
+  <footer class="apple-footer">
+    <div class="footer-container">
+      <ol class="footer-footnotes">
+        <li><sup>1</sup> L'autonomie de 6 heures sans faiblir est calculée selon un protocole d'essai en conditions festives réelles, sous réserve d'un réapprovisionnement régulier en Spritz et en conversation animée. Les performances réelles peuvent varier en fonction du nombre de verres et de l'ambiance musicale.</li>
+        <li><sup>2</sup> Le nouveau module sonore a été calibré avec des tests rigoureux de pression acoustique. La cadence x2 est garantie après dégustation de boissons gazeuses. Aucune réduction active du bruit ne sera proposée.</li>
+        <li><sup>3</sup> La Puce S Spontanée opère sans filtre de convenance sociale. Les insultes sont livrées directement préinstallées dans le firmware et ne peuvent faire l'objet d'une désactivation dans les Réglages.</li>
+        <li><sup>4</sup> Le bug du « Je ne bois qu'un seul verre » est protégé par le brevet d'amusement universel et ne sera jamais corrigé.</li>
+        <li><sup>5</sup> Réservation obligatoire dans la limite des places disponibles au restaurant Le Giallo à Sainghin-en-Mélantois. Exemplaire non échangeable, non remboursable, à aimer sans modération.</li>
+      </ol>
+
+      <div class="footer-bottom">
+        <p>Copyright © 2026 Ingrid Inc. Tous droits réservés. Célébration des 42 ans.</p>
+        <ul class="footer-links">
+          <li><a href="#presentation">Haut de page</a></li>
+          <li><a href="#evenement">Le Giallo</a></li>
+          <li><a href="#reservation" class="trigger-rsvp">Réserver</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <canvas id="confetti-canvas"></canvas>
+
+  <script src="js/confetti.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

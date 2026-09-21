@@ -72,42 +72,71 @@ function initVideoManager() {
   if (!video) return;
 
   const playlist = [
-    'assets/videos/background.mp4',
     'assets/videos/clip2.mp4',
-    'assets/videos/clip3.mp4'
+    'assets/videos/clip3.mp4',
+    'assets/videos/background.mp4'
   ];
   let currentClipIndex = 0;
   let autoLoopPlaylist = true;
 
-  // Set initial video
+  // Ensure muted and playsinline for mobile and desktop autoplay
+  video.muted = true;
+  video.defaultMuted = true;
+  video.playsInline = true;
+  video.setAttribute('muted', '');
+  video.setAttribute('playsinline', '');
+
+  function attemptPlay() {
+    video.muted = true;
+    const playPromise = video.play();
+    if (playPromise !== undefined) {
+      playPromise.then(() => {
+        video.style.opacity = '1';
+        if (playToggleBtn) playToggleBtn.innerHTML = `<span>⏸ Pause</span>`;
+      }).catch(err => {
+        console.log('Autoplay restriction, unlocking on gesture:', err);
+      });
+    }
+  }
+
+  // Initial load
   video.src = playlist[0];
   video.load();
-  video.play().catch(() => {});
+  attemptPlay();
 
-  video.addEventListener('error', () => {
-    // If background.mp4 fails or is missing, try next or rely on ambient canvas
-    console.log('Video load notice, canvas fallback active');
-  });
+  // Unlock autoplay on first interaction if blocked by browser policy
+  const unlockAutoplay = () => {
+    if (video.paused) {
+      attemptPlay();
+    }
+    window.removeEventListener('click', unlockAutoplay);
+    window.removeEventListener('scroll', unlockAutoplay);
+    window.removeEventListener('touchstart', unlockAutoplay);
+  };
+  window.addEventListener('click', unlockAutoplay, { once: true });
+  window.addEventListener('scroll', unlockAutoplay, { once: true });
+  window.addEventListener('touchstart', unlockAutoplay, { once: true });
 
   video.addEventListener('playing', () => {
-    video.style.opacity = '0.75';
+    video.style.opacity = '1';
   });
 
-  // When a clip ends, if in auto-loop mode, move to next clip
+  // When a clip ends, automatically cycle to the next clip
   video.addEventListener('ended', () => {
     if (autoLoopPlaylist && playlist.length > 1) {
       currentClipIndex = (currentClipIndex + 1) % playlist.length;
       switchClip(currentClipIndex);
+    } else {
+      video.play();
     }
   });
 
-  // Clip buttons in floating bar
+  // Clip switcher buttons
   clipButtons.forEach((btn) => {
     btn.addEventListener('click', () => {
       const idx = parseInt(btn.dataset.clip, 10);
       if (!isNaN(idx) && idx >= 0 && idx < playlist.length) {
         currentClipIndex = idx;
-        autoLoopPlaylist = false; // User explicitly selected a clip
         switchClip(currentClipIndex);
       }
     });
@@ -119,14 +148,15 @@ function initVideoManager() {
       else b.classList.remove('active');
     });
 
-    video.style.opacity = '0.2';
+    video.style.opacity = '0.3';
     setTimeout(() => {
       video.src = playlist[idx];
       video.load();
+      video.muted = true;
       video.play().then(() => {
-        video.style.opacity = '0.75';
+        video.style.opacity = '1';
       }).catch(() => {});
-    }, 250);
+    }, 200);
   }
 
   // Toggle Play / Pause
@@ -134,10 +164,10 @@ function initVideoManager() {
     playToggleBtn.addEventListener('click', () => {
       if (video.paused) {
         video.play();
-        playToggleBtn.innerHTML = `<span>⏸ Pause vidéo</span>`;
+        playToggleBtn.innerHTML = `<span>⏸ Pause</span>`;
       } else {
         video.pause();
-        playToggleBtn.innerHTML = `<span>▶ Lecture vidéo</span>`;
+        playToggleBtn.innerHTML = `<span>▶ Lecture</span>`;
       }
     });
   }

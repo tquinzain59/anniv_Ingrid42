@@ -261,7 +261,13 @@ body {
   position: relative;
   min-height: 100vh;
   overflow-x: hidden;
-  background-color: var(--bg-black);
+  background-color: transparent;
+}
+
+/* Ensure all content sits above the video background */
+aside, header, main, footer {
+  position: relative;
+  z-index: 10;
 }
 
 /* --------------------------------------------------------------------------
@@ -274,7 +280,7 @@ body {
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  z-index: -10;
+  z-index: 0;
   pointer-events: none;
 }
 
@@ -288,8 +294,9 @@ body {
   height: auto;
   transform: translate(-50%, -50%);
   object-fit: cover;
-  filter: brightness(0.55) contrast(1.15) saturate(1.2);
-  transition: opacity 1s ease;
+  opacity: 1;
+  filter: brightness(0.7) contrast(1.08);
+  transition: opacity 0.5s ease;
   z-index: 1;
 }
 
@@ -304,18 +311,17 @@ body {
 
 /* Dark Film Overlay Filter */
 .dark-overlay {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: -5;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
   pointer-events: none;
   background: 
-    radial-gradient(circle at 50% 30%, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.78) 55%, #000000 95%),
-    linear-gradient(180deg, rgba(0,0,0,0.65) 0%, transparent 20%, transparent 80%, rgba(0,0,0,0.95) 100%);
-  backdrop-filter: blur(1.5px);
-  box-shadow: inset 0 0 150px rgba(0, 0, 0, 0.9);
+    linear-gradient(180deg, rgba(0, 0, 0, 0.55) 0%, rgba(0, 0, 0, 0.38) 40%, rgba(0, 0, 0, 0.55) 80%, rgba(0, 0, 0, 0.8) 100%),
+    radial-gradient(ellipse at 50% 35%, transparent 20%, rgba(0, 0, 0, 0.5) 75%, rgba(0, 0, 0, 0.8) 100%);
+  box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.7);
 }
 
 /* --------------------------------------------------------------------------

@@ -447,7 +447,7 @@ function initRSVP() {
         }
 
         // Configure Direct Mailto Fallback
-        const emailBody = `Bonjour Thomas,\n\nJe confirme ma présence pour la sortie officielle d'Ingrid 42.0 !\n\n👤 Invité(e) : ${name}\n👥 Présence : ${count}\n🍹 Boisson de charge : ${drink}\n📞 Contact : ${contact || 'N/A'}\n💬 Mon mot pour Ingrid : ${note || 'Hâte de fêter ça !'}\n\nÀ vendredi au Giallo ! 🥂`;
+        const emailBody = `Bonjour Thibaut,\n\nJe confirme ma présence pour la sortie officielle d'Ingrid 42.0 !\n\n👤 Invité(e) : ${name}\n👥 Présence : ${count}\n🍹 Boisson de charge : ${drink}\n📞 Contact : ${contact || 'N/A'}\n💬 Mon mot pour Ingrid : ${note || 'Hâte de fêter ça !'}\n\nÀ vendredi au Giallo ! 🥂`;
         if (btnEmailDirect) {
           btnEmailDirect.href = `mailto:tquinzain@gmail.com?subject=${encodeURIComponent(`🎉 Réservation Ingrid 42.0 : ${name}`)}&body=${encodeURIComponent(emailBody)}`;
         }

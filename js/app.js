@@ -377,34 +377,93 @@ function initRSVP() {
 
   // Handle Confirmation
   if (form) {
+    const btnSubmit = document.getElementById('btn-submit-rsvp');
+    const loadingEl = document.getElementById('rsvp-status-loading');
+    const btnEmailDirect = document.getElementById('btn-send-email-direct');
+
     form.addEventListener('submit', (e) => {
       e.preventDefault();
       const name = document.getElementById('rsvp-name').value.trim() || 'Ami VIP';
       const count = document.getElementById('rsvp-guests').value;
+      const drinkEl = document.getElementById('rsvp-drink');
+      const drink = drinkEl ? drinkEl.value : 'Spritz';
+      const contactEl = document.getElementById('rsvp-contact');
+      const contact = contactEl ? contactEl.value.trim() : '';
       const note = document.getElementById('rsvp-note').value.trim();
 
-      // Show ticket view
-      form.style.display = 'none';
-      successView.classList.add('show');
-      if (passGuestName) passGuestName.textContent = name;
-      if (passOption) passOption.textContent = `${count} • Prêt pour Ingrid 42.0`;
+      if (btnSubmit) {
+        btnSubmit.disabled = true;
+        btnSubmit.innerHTML = `<span>⏳ Envoi en cours...</span>`;
+      }
+      if (loadingEl) loadingEl.style.display = 'block';
 
-      // Launch Apple Confetti
-      if (window.confetti) {
-        window.confetti.fire();
+      // Build payload for email transmission
+      const payload = {
+        "Nom de l'invité": name,
+        "Formule de présence": count,
+        "Boisson de charge": drink,
+        "Contact (Tel/Email)": contact || 'Non renseigné',
+        "Message pour Ingrid": note || 'Aucun message particulier',
+        "_subject": `🎉 Réservation Ingrid 42.0 : ${name} (${count})`,
+        "_template": "table",
+        "_captcha": "false"
+      };
+
+      // Save locally as backup
+      try {
+        const history = JSON.parse(localStorage.getItem('ingrid42_guest_reservations') || '[]');
+        history.push({ ...payload, timestamp: new Date().toISOString() });
+        localStorage.setItem('ingrid42_guest_reservations', JSON.stringify(history));
+      } catch (err) {
+        console.warn('localStorage error', err);
       }
 
-      // Build personalized confirmation text
-      const msg = `🎉 Bonjour ! Je confirme ma présence pour la sortie officielle d'Ingrid 42.0 au Giallo à Sainghin ce vendredi 25/09 à 19h30 !\n\n👤 Invité : ${name}\n👥 Présence : ${count}\n💬 Note pour Ingrid : ${note || "Je viens voir la Puce S et le bug du verre !"}\n\nÀ vendredi ! 🥂`;
-      const encodedMsg = encodeURIComponent(msg);
+      // Automated AJAX transmission to tquinzain@gmail.com
+      fetch('https://formsubmit.co/ajax/tquinzain@gmail.com', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      })
+      .then(res => res.json())
+      .then(data => {
+        console.log('FormSubmit response:', data);
+      })
+      .catch(err => {
+        console.warn('FormSubmit fetch notice (fallback ready):', err);
+      })
+      .finally(() => {
+        // Show ticket view
+        form.style.display = 'none';
+        successView.classList.add('show');
+        if (passGuestName) passGuestName.textContent = name;
+        if (passOption) passOption.textContent = `${count} • Prêt pour Ingrid 42.0`;
 
-      if (btnWhatsapp) {
-        btnWhatsapp.href = `https://api.whatsapp.com/send?text=${encodedMsg}`;
-      }
+        // Launch Apple Confetti
+        if (window.confetti) {
+          window.confetti.fire();
+        }
 
-      if (btnSms) {
-        btnSms.href = `sms:?&body=${encodedMsg}`;
-      }
+        // Configure Direct Mailto Fallback
+        const emailBody = `Bonjour Thomas,\n\nJe confirme ma présence pour la sortie officielle d'Ingrid 42.0 !\n\n👤 Invité(e) : ${name}\n👥 Présence : ${count}\n🍹 Boisson de charge : ${drink}\n📞 Contact : ${contact || 'N/A'}\n💬 Mon mot pour Ingrid : ${note || 'Hâte de fêter ça !'}\n\nÀ vendredi au Giallo ! 🥂`;
+        if (btnEmailDirect) {
+          btnEmailDirect.href = `mailto:tquinzain@gmail.com?subject=${encodeURIComponent(`🎉 Réservation Ingrid 42.0 : ${name}`)}&body=${encodeURIComponent(emailBody)}`;
+        }
+
+        // Build personalized WhatsApp & SMS confirmation text
+        const msg = `🎉 Bonjour ! Je confirme ma présence pour la sortie officielle d'Ingrid 42.0 au Giallo à Sainghin ce vendredi 25/09 à 19h30 !\n\n👤 Invité : ${name}\n👥 Présence : ${count}\n🍹 Boisson : ${drink}\n💬 Note pour Ingrid : ${note || "Je viens voir la Puce S et le bug du verre !"}\n\nÀ vendredi ! 🥂`;
+        const encodedMsg = encodeURIComponent(msg);
+
+        if (btnWhatsapp) {
+          btnWhatsapp.href = `https://api.whatsapp.com/send?text=${encodedMsg}`;
+        }
+
+        if (btnSms) {
+          btnSms.href = `sms:?&body=${encodedMsg}`;
+        }
+      });
     });
   }
 

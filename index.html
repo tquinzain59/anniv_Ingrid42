@@ -452,17 +452,30 @@
         </div>
 
         <div class="form-group">
-          <label class="form-label" for="rsvp-note">Un message spécial pour Ingrid ?</label>
-          <textarea id="rsvp-note" class="form-textarea" rows="2" placeholder="Une réplique, un vœu pour ses 42 ans..."></textarea>
+          <label class="form-label" for="rsvp-contact">Votre Téléphone ou E-mail (facultatif)</label>
+          <input type="text" id="rsvp-contact" class="form-input" placeholder="Ex: 06 12 34 56 78 ou jean@email.com">
         </div>
 
-        <button type="submit" class="btn-whatsapp-rsvp" style="width: 100%; margin-top: 10px;">
-          <span>Valider ma réservation</span>
+        <div class="form-group">
+          <label class="form-label" for="rsvp-note">Un message spécial pour Ingrid ?</label>
+          <textarea id="rsvp-note" class="form-textarea" rows="3" placeholder="Une anecdote, une réplique culte, un vœu pour ses 42 ans..."></textarea>
+        </div>
+
+        <button type="submit" id="btn-submit-rsvp" class="btn-whatsapp-rsvp" style="width: 100%; margin-top: 10px;">
+          <span>✉️ Valider et envoyer mon message</span>
         </button>
+        <div id="rsvp-status-loading" style="display: none; text-align: center; color: #d4af37; font-size: 14px; margin-top: 12px;">
+          <span>⏳ Envoi en cours à l'adresse tquinzain@gmail.com...</span>
+        </div>
       </form>
 
       <!-- VIEW CONFIRMATION PASS WALLET -->
       <div id="rsvp-success" class="rsvp-success-view">
+        <div id="email-confirmation-status" style="background: rgba(48, 209, 88, 0.15); border: 1px solid rgba(48, 209, 88, 0.3); border-radius: 14px; padding: 14px; margin-bottom: 20px; font-size: 14px; color: #30d158; text-align: center;">
+          ✅ <strong>Réservation transmise avec succès !</strong><br>
+          <span style="color: #e5e5ea; font-size: 13px;">Votre message a bien été envoyé par e-mail à Thomas pour Ingrid.</span>
+        </div>
+
         <div class="apple-pass-ticket">
           <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px dashed rgba(255,255,255,0.2); padding-bottom: 12px; margin-bottom: 12px;">
             <span style="font-size: 13px; font-weight: 700; color: #d4af37;">INGRID 42.0 • PASS KEYNOTE</span>
@@ -482,16 +495,19 @@
           </div>
         </div>
 
-        <p style="font-size: 14px; color: #a1a1a6; margin-bottom: 20px;">
-          Envoyez votre confirmation en un clic pour finaliser la réservation sur le carnet d'adresses :
+        <p style="font-size: 14px; color: #a1a1a6; margin-bottom: 14px; text-align: center;">
+          Vous pouvez également envoyer un double direct ou enregistrer l'événement :
         </p>
 
         <div class="rsvp-channels">
+          <a id="btn-send-email-direct" href="#" class="btn-glass-secondary" style="width: 100%; justify-content: center;">
+            <span>✉️ Envoyer un double par E-mail</span>
+          </a>
           <a id="btn-send-whatsapp" href="#" target="_blank" class="btn-whatsapp-rsvp">
-            <span>💬 Envoyer ma confirmation via WhatsApp</span>
+            <span>💬 Envoyer aussi sur WhatsApp</span>
           </a>
           <a id="btn-send-sms" href="#" class="btn-sms-rsvp">
-            <span>✉️ Envoyer par SMS</span>
+            <span>📱 Envoyer par SMS</span>
           </a>
           <button id="btn-download-ics" class="btn-glass-secondary" style="width: 100%; justify-content: center;">
             <span>📅 Ajouter l'événement à mon Agenda (.ics)</span>

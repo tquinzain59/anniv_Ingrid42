@@ -351,8 +351,7 @@ function initRSVP() {
   const passGuestName = document.getElementById('pass-guest-name');
   const passOption = document.getElementById('pass-option');
 
-  const btnWhatsapp = document.getElementById('btn-send-whatsapp');
-  const btnSms = document.getElementById('btn-send-sms');
+  const finishBtn = document.getElementById('btn-finish-rsvp');
   const btnCalendar = document.getElementById('btn-download-ics');
 
   function openModal() {
@@ -371,6 +370,7 @@ function initRSVP() {
   }));
 
   if (closeBtn) closeBtn.addEventListener('click', closeModal);
+  if (finishBtn) finishBtn.addEventListener('click', closeModal);
   modalBackdrop.addEventListener('click', (e) => {
     if (e.target === modalBackdrop) closeModal();
   });
@@ -379,7 +379,6 @@ function initRSVP() {
   if (form) {
     const btnSubmit = document.getElementById('btn-submit-rsvp');
     const loadingEl = document.getElementById('rsvp-status-loading');
-    const btnEmailDirect = document.getElementById('btn-send-email-direct');
 
     form.addEventListener('submit', (e) => {
       e.preventDefault();
@@ -393,11 +392,11 @@ function initRSVP() {
 
       if (btnSubmit) {
         btnSubmit.disabled = true;
-        btnSubmit.innerHTML = `<span>⏳ Envoi en cours...</span>`;
+        btnSubmit.innerHTML = `<span>Confirmation en cours...</span>`;
       }
       if (loadingEl) loadingEl.style.display = 'block';
 
-      // Build payload for email transmission
+      // Build payload for automated email transmission to tquinzain@gmail.com
       const payload = {
         "Nom de l'invité": name,
         "Formule de présence": count,
@@ -418,7 +417,7 @@ function initRSVP() {
         console.warn('localStorage error', err);
       }
 
-      // Automated AJAX transmission to tquinzain@gmail.com
+      // Automated background AJAX transmission directly to tquinzain@gmail.com
       fetch('https://formsubmit.co/ajax/tquinzain@gmail.com', {
         method: 'POST',
         headers: {
@@ -429,10 +428,10 @@ function initRSVP() {
       })
       .then(res => res.json())
       .then(data => {
-        console.log('FormSubmit response:', data);
+        console.log('Réservation transmise par e-mail avec succès:', data);
       })
       .catch(err => {
-        console.warn('FormSubmit fetch notice (fallback ready):', err);
+        console.warn('Notice transmission e-mail:', err);
       })
       .finally(() => {
         // Show ticket view
@@ -444,24 +443,6 @@ function initRSVP() {
         // Launch Apple Confetti
         if (window.confetti) {
           window.confetti.fire();
-        }
-
-        // Configure Direct Mailto Fallback
-        const emailBody = `Bonjour Thibaut,\n\nJe confirme ma présence pour la sortie officielle d'Ingrid 42.0 !\n\n👤 Invité(e) : ${name}\n👥 Présence : ${count}\n🍹 Boisson de charge : ${drink}\n📞 Contact : ${contact || 'N/A'}\n💬 Mon mot pour Ingrid : ${note || 'Hâte de fêter ça !'}\n\nÀ vendredi au Giallo ! 🥂`;
-        if (btnEmailDirect) {
-          btnEmailDirect.href = `mailto:tquinzain@gmail.com?subject=${encodeURIComponent(`🎉 Réservation Ingrid 42.0 : ${name}`)}&body=${encodeURIComponent(emailBody)}`;
-        }
-
-        // Build personalized WhatsApp & SMS confirmation text
-        const msg = `🎉 Bonjour ! Je confirme ma présence pour la sortie officielle d'Ingrid 42.0 au Giallo à Sainghin ce vendredi 25/09 à 19h30 !\n\n👤 Invité : ${name}\n👥 Présence : ${count}\n🍹 Boisson : ${drink}\n💬 Note pour Ingrid : ${note || "Je viens voir la Puce S et le bug du verre !"}\n\nÀ vendredi ! 🥂`;
-        const encodedMsg = encodeURIComponent(msg);
-
-        if (btnWhatsapp) {
-          btnWhatsapp.href = `https://api.whatsapp.com/send?text=${encodedMsg}`;
-        }
-
-        if (btnSms) {
-          btnSms.href = `sms:?&body=${encodedMsg}`;
         }
       });
     });
